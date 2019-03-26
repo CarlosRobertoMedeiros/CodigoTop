@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="Aula3">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript" src="../Bibliotecas/angularjs/1.7.8/angular.min.js"></script>
+
+	<script type="text/javascript">
+	
+		angular.module('Aula3',[])
+		.controller('aula2Controller', function($scope){
+				$scope.nomeProfissional = "Roger";
+				$scope.ativo = false;
+			}
+		);
+	</script>
+
+</head>
+<body ng-controller="aula2Controller">
+
+	{{nomeProfissional}}
+	<br/>
+	{{ativo}}
+	<input type="text" name="nome-profissional" ng-model="nomeProfissional">
+	<input type="checkbox" name="chkAtivo" ng-model="ativo">
+	
+
+</body>
+</html>

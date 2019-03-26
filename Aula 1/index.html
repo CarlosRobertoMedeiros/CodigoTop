@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../Bibliotecas/angularjs/1.7.8/angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module("Aula1",[])
+		.controller("meuPrimeiroController", function($scope){
+			$scope.mensagemHelloWorld = "Hello World";
+		})
+	</script>
+</head>
+<body ng-app="Aula1">
+	<h1 ng-controller="meuPrimeiroController">{{mensagemHelloWorld}}</h1>
+</body>
+</html>
+
+
