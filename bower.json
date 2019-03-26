@@ -1,0 +1,25 @@
+{
+  "name": "codigotop",
+  "description": "Only examples testers",
+  "main": "index.js",
+  "authors": [
+    "carlosmedeiroslima@gmail.com"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "AngularJS",
+    "FrontEnd"
+  ],
+  "homepage": "https://github.com/CarlosRobertoMedeiros/CodigoTop",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.7.8",
+    "bootstrap": "v3.4.1"
+  }
+}

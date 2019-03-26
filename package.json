@@ -1,0 +1,30 @@
+{
+  "name": "codigotop",
+  "version": "1.0.0",
+  "description": "Only examples testers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlosRobertoMedeiros/CodigoTop.git"
+  },
+  "keywords": [
+    "AngularJS",
+    "FrontEnd"
+  ],
+  "author": "carlosmedeiroslima@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarlosRobertoMedeiros/CodigoTop/issues"
+  },
+  "homepage": "https://github.com/CarlosRobertoMedeiros/CodigoTop#readme",
+  "dependencies": {
+    "bower": "^1.8.8"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-webserver": "^0.9.1"
+  }
+}
