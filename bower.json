@@ -20,6 +20,6 @@
   ],
   "dependencies": {
     "angular": "angularjs#^1.7.8",
-    "bootstrap": "v3.4.1"
+    "bootstrap": "^4.3.1"
   }
 }

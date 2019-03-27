@@ -12,30 +12,87 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	
-	<script type="text/javascript" src="../Bibliotecas/angularjs/1.7.8/angular.min.js"></script>
-	<script type="text/javascript" src="../Bibliotecas/jquery/1.12.4/jquery-1.12.4.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../Bibliotecas/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous"> 
-
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
 	<script type="text/javascript">
 		var app = angular.module('Aula4',[]);
 		app.controller('aula4Controller',function($scope){
-	
+			
+			$scope.nomeListaPessoas = 'Lista de Pessoas';	
+
+			$scope.listaPessoas=[];
+
+			$scope.pessoa1 = {
+								"nome":"Roger",
+								"idade":34,
+								"pais":"Brasil"
+							 };
+
+			 $scope.pessoa2 = {
+				"nome":"João",
+				"idade":23,
+				"pais":"Brasil"
+			 };
+
+			$scope.listaPessoas.push($scope.pessoa1);
+			$scope.listaPessoas.push($scope.pessoa2);
+
+
 		});
 
 	</script>
 
 </head>
 <body ng-controller="aula4Controller">
-    <h1>Aula 4</h1>	
+    
+	<div class="container">
+	    
+	    <div class="jumbotron">
+	    	<h1>Aula 4</h1>	
+	    	<p></p>
+	    	<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn More</a></p>
+		</div>	
+	
+
+		<div class="panel panel-default">
+			<div class="panel-heading">{{nomeListaPessoas}}</div>
+				<div class="panel-body">
+					<ul>
+						
+						<li ng-repeat="pessoa in listaPessoas">
+
+							<div class="panel panel-default">
+								<div class="panel-heading">{{pessoa.nome}}</div>
+							
+								<div class="panel-body">
+									<ul>
+										<li>Idade:{{pessoa.idade}}</li>
+										<li>Pais:{{pessoa.pais}}</li>
+									</ul>
+								</div>	
+							
+							</div>	
+						
+						</li>
+					
+					</ul>
+			</div>
+		</div>
+
+	</div> <!--fim da div do container -->
+
+
+
+
 </body>
 </html>
 
 
 <!--
---Continuar a partir do minuto 3:20
-https://www.youtube.com/watch?v=vdgy3qp36q8
-AngularJS - Caia pra trás com ng-repeat! - Aula 4 - Versão Estendida
+--Continuar a partir do minuto 1
+https://www.youtube.com/watch?v=OJfquGQvMog
+AngularJS - Fazendo Show com Click - Aula 5
 6:51
 file:///home/roberto/Documentos/Dev/Estudo/Projetos/Sistemas/CodigoTop/Aula%204/index.html
 -->
