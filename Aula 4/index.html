@@ -39,6 +39,23 @@
 			$scope.listaPessoas.push($scope.pessoa2);
 
 
+			$scope.incluirPessoas = function(sNome,iIdade,sPais){
+				$scope.listaPessoas.push({
+											nome: sNome, 
+											idade: iIdade, 
+											pais:sPais
+										});
+			};
+
+
+			$scope.excluirPessoa = function(sNome){
+
+				var listaPessoasNovas = $scope.listaPessoas.filter(
+													function(pessoa){	
+														return pessoa.nome != sNome;
+													});
+				$scope.listaPessoas = listaPessoasNovas;
+			}
 		});
 
 	</script>
@@ -70,6 +87,7 @@
 										<li>Idade:{{pessoa.idade}}</li>
 										<li>Pais:{{pessoa.pais}}</li>
 									</ul>
+									<button class="btn btn-default" ng-click="excluirPessoa(pessoa.nome);">Excluir</button>
 								</div>	
 							
 							</div>	
@@ -92,8 +110,7 @@
 <!--
 --Continuar a partir do minuto 1
 https://www.youtube.com/watch?v=OJfquGQvMog
-AngularJS - Fazendo Show com Click - Aula 5
-6:51
+AngularJS - Fazendo Show com Click - Aula 5 a partir de 09:06
 file:///home/roberto/Documentos/Dev/Estudo/Projetos/Sistemas/CodigoTop/Aula%204/index.html
 -->
 
