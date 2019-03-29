@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var webserver = require('gulp-webserver');
  
 gulp.task('webserver', function() {
-  gulp.src("./Aula 4")
+  gulp.src("./Aula 6")
     .pipe(webserver({
       host:"localhost",
       port:8020,

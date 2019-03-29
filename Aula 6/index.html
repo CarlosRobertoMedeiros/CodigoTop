@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="Aula4">
+<html ng-app="Aula6">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Aula 4</title>
+	<title>{{titulo}}</title>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>\
@@ -16,9 +16,9 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
 	<script type="text/javascript">
-		var app = angular.module('Aula4',[]);
-		app.controller('aula4Controller',function($scope){
-			
+		var app = angular.module('Aula6',[]);
+		app.controller('aula4Controller',function($rootScope,$scope,$http){
+			$rootScope.titulo = 'Aula 6';
 			$scope.nomeListaPessoas = 'Lista de Pessoas';	
 
 			$scope.listaPessoas=[];
@@ -63,6 +63,25 @@
 														return pessoa.nome != sNome;
 													});
 				$scope.listaPessoas = listaPessoasNovas;
+			};
+
+			$scope.carregarPessoas = function (){
+				$scope.carregandoPessoas = true;
+				
+				$http({
+					url: 'pessoas.json',
+					method:'GET'
+				}).then(function(resposta){
+					$scope.listaPessoas = resposta.data;
+				}, function(resposta){
+					 console.log("Algum Erro Aconteceu");	
+				}).finally(function(){
+					$scope.carregandoPessoas = false;
+					console.log("Chamei o finally");
+					//Esse código esta dando erro devido ao uso da diretiva
+					//estar limitada a objetos de outros tipos
+					//Realizei a interpolação da variável e o erro permanece
+				})
 			}
 		});
 
@@ -74,11 +93,16 @@
 	<div class="container">
 	    
 	    <div class="jumbotron">
-	    	<h1>Aula 4</h1>	
+	    	<h1>{{titulo}}</h1>	
 	    	<p></p>
 	    	<p><a class="btn btn-primary btn-lg" ng-hide="exibirFormularioInclusao" 
 	    										 ng-click="exibirFormularioInclusao=true;" 
 	    										 href="#" role="button">Incluir Pessoa
+	    		</a>
+	    	</p>
+	    	<p><a class="btn btn-primary btn-lg" ng-disabled="carregandoPessoas" 
+	    										 ng-click="carregarPessoas();" 
+	    										 href="#" role="button">Carregar Pessoas Ajax
 	    		</a>
 	    	</p>
 		</div>	
@@ -140,9 +164,10 @@
 
 
 <!--
---Continuar a partir do minuto 1
-https://www.youtube.com/watch?v=OJfquGQvMog
-AngularJS - Fazendo Show com Click - Aula 5 a partir de 09:06
+--Continuar 
+https://www.youtube.com/watch?v=4PcseiEU2fg&list=PLs8HfGdP-opu8nNOP6gnNdXrxE0n_V7s0&index=7
+AngularJS - AJAX Wikipedia API - Aula Bônus
 file:///home/roberto/Documentos/Dev/Estudo/Projetos/Sistemas/CodigoTop/Aula%204/index.html
 -->
+
 

@@ -1,0 +1,13 @@
+[
+	{
+		"nome":"Pessoa 1 Ajax",
+		"idade":25,
+		"pais":"Brasil"
+	},
+	{
+		"nome":"Pessoa 2 Ajax",
+		"idade":26,
+		"pais":"Uruguai"
+	}
+
+]
