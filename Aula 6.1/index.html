@@ -18,22 +18,32 @@
 
 	<script type="text/javascript">
 		var app = angular.module('Aula6.1',[]);
-		app.controller('Aula6.1Controller', function($scope,$http){
+		app.controller('Aula6.1Controller', function($scope,$http,$sce){
 		
 			$scope.title = 'Aula 6 Extra';
 			$scope.nomeLista ='Lista de Títulos';
 			$scope.termodeBusca='Brasil';
+			$scope.listaBuscas = [];
 
+			//Em caso de Erro de CORS 
+			//Onde o front-end tenta acessar um back-end de domínio diferente
+			//Ex. uso como front end o domínio local e consumo do back end 
+			//atráves do domínio pt.wikipedia.org
+			//Deve-se utilizar o jsonP  função do angular para "ajustar " o cabeçalho enviado
+			// Além da implementação do provider $sce e sua configuração conforme informado na linha que finaliza
+			//a carga do controlador
 			$scope.carregarBusca = function(){
-				$http({
-					url: 'https://pt.wikipedia.org/w/api.php?action=query&prop=pageimages%7Cextracts&format=json&piprop=thumbnail%7Cname%7Coriginal&exintro=&explaintext=&redirects=yes&callback=&titles='+$scope.termodeBusca;
-				}).then(function(resposta){
-					console.log(resposta);
+				$http.jsonp($sce.trustAsUrl(
+					'https://pt.wikipedia.org/w/api.php?action=query&prop=pageimages%7Cextracts&format=json&piprop=thumbnail%7Cname%7Coriginal&exintro=&explaintext=&redirects=yes&titles='+$scope.termodeBusca)
+				).then(function(resposta){
+					var pages = resposta.data.query.pages;
+					var nomePropriedade = Object.keys(pages)[0];
+					
+					$scope.listaBuscas.push(pages[nomePropriedade]);
 				});
 			};
 
-
-		});
+		}).config(function($sceProvider) {$sceProvider.enabled(false);});﻿
 	</script>
 
 
@@ -63,10 +73,25 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">{{nomeLista}}</div>
 			<div class="panel-body">
+				<ul>
+					<li ng-repeat="busca in  listaBuscas">
+						<div class="panel panel-default">
+							<div class="panel-heading">{{busca.title}}</div>
+								<div class="panel-body">
+									<div ng-show="busca.thumbnail">
+										<img ng-src="{{busca.thumbnail.source}}">
+									</div>
+									<div>
+										{{busca.extract}}
+									</div>	
+								</div>		
 
 
-			</div>			
-
+							</div>
+						</div>	
+					</li>		
+				</ul>
+			</div>
 		</div>
 	</div> <!--Fim da divContaier -->
 
