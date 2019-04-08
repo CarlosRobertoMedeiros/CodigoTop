@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="aula9">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{title}}</title>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>\
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+	<!-- $on() = aguarda um determinado evento
+	//$broadcast() = envio do controle do pai para filho 
+	//$emit() = envio do controle do filho para o pai até o ng-app
+	//Exemplo análogo como o efeito booble do html onde se sobe até o html
+	-->	
+
+	<script type="text/javascript">
+
+		angular.module('aula9',[]).run(function($rootScope){
+			$rootScope.titulo = "Aula 9";
+			$rootScope.nome = "Roger";
+		})
+
+		.controller('PainelController',function($rootScope,$scope,$http){
+			var ctrl = this;
+			ctrl.titulo = "Painel";
+			ctrl.pessoaSelecionada = null;
+
+
+			ctrl.mudarTitulo=function(nome){
+				if (nome){
+					ctrl.titulo = nome;
+				}
+				else{
+					ctrl.titulo = Math.round(Math.random()*10000,0);
+				}
+				ctrl.nome = ctrl.titulo;
+			}
+
+			$scope.$on('pessoaSelecionada',function(event,oEvento){
+				ctrl.pessoaSelecionada = oEvento;
+
+			})
+
+
+
+		})
+		.controller('ListaController', function($rootScope,$http){
+			var ctrl = this;
+			ctrl.titulo="Lista";
+
+			ctrl.listaPessoas = [
+				{nome:'Roger' , idade:23,email:'xyz@gmail.com'}
+
+			];
+
+
+			ctrl.pessoaSelecionada = function(pessoa){
+				$rootScope.$broadcast("pessoaSelecionada",pessoa);
+			}
+
+
+			
+
+		});
+
+	</script>
+	<style type="text/css" media="screen">
+		.vermelho{color:red;}
+	</style>
+
+</head>
+<body>
+	<div class="container">
+			<div class="jumbotron">
+				<h1>{{titulo}} - {{nome}}</h1>
+			</div>
+
+			<div class="panel panel-default" ng-controller="ListaController as lc"  >
+				<div class="panel-heading">{{lc.titulo}}</div>
+				<div class="panel-body">
+					<ul>
+						<li ng-repeat="pessoa in lc.listaPessoas" ng-click="lc.pessoaSelecionada(pessoa);">{{pessoa.nome}}</li>	
+					</ul>
+
+				</div>
+					
+			</div>		
+
+			<div class="panel panel-default" ng-controller="PainelController as pc"  >
+				<div class="panel-heading">{{pc.titulo}}</div>
+				<div class="panel-body">
+					{{pc.pessoaSelecionada.nome}}	
+				</div>
+					
+			</div>
+					
+	</div>
+
+
+</body>
+</html>

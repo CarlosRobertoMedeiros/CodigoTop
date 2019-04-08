@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="aula7">
+<html ng-app="aula8">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,57 +17,43 @@
 
 	<script type="text/javascript">
 		
-		var app = angular.module('aula7',[]).run(function($rootScope){
-				$rootScope.title = "Aula 7";			
-				$rootScope.nome ="Roger";
-		});
+		var app = angular.module('aula8',[]).run(function($rootScope){
+			$rootScope.title="Aula 8";
+			$rootScope.nome="Roger";
+		})
+
+		.controller('aula8Controller',function($scope){
+			$scope.title = "Painel da Aula 8";
+		
 
 
-		app.controller('painelController', function($rootScope,$scope){
-			$scope.title = "Painel";
 
-			$scope.mudarTitulo = function(){
-				$scope.title = Math.round(Math.random()*10000,0);
-				$scope.nome + $scope.titulo;
-
-			}
-
-		});
-
-
-		app.controller('listaController', function($rootScope,$scope){
-			$scope.title = "Lista";
-			$scope.lista=["Roger","Eduardo","João"];
 
 		});
 
 	</script>
+
+
 </head>
+
+
 <body>
 
 	<div class="container">
-		<div class="jumbotron">
-			<h1>{{title}} + {{nome}}</h1>
-		</div>
-
-		<div class="panel panel-default" ng-controller="painelController">
-			<div class="panel-heading">{{title}}</div>
-			<div class="panel-body">
-				<button class="btn btn-primary" ng-click="mudarTitulo()">Novo Titulo</button>
-				{{nome}}
-				
-
-
+			<div class="jumbotron">
+				<h1>{{title}}</h1>
 			</div>
-		</div> <!-- Fim do Painel -->
 
+			<div class="panel panel-default" ng-controller="aula8Controller">
+				<div class="panel-heading">{{title}}</div>
+				<div class="panel-body">
+					
 
-
-
+				</div>
+			</div> <!-- Fim do Painel -->
 	</div>
+
+
 
 </body>
 </html>
-
-<!-- Continuar com 2 minutos da aula 7 -->
-

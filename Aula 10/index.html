@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="aula7">
+<html ng-app="aula10">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{title}}</title>
+	<title>{{titulo}}</title>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>\
@@ -15,59 +15,50 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
+
 	<script type="text/javascript">
+		var app = angular.module('aula10',[]).run(function($rootScope){
+			$rootScope.titulo = "Aula 10";
+
+
+		})
 		
-		var app = angular.module('aula7',[]).run(function($rootScope){
-				$rootScope.title = "Aula 7";			
-				$rootScope.nome ="Roger";
-		});
 
 
-		app.controller('painelController', function($rootScope,$scope){
-			$scope.title = "Painel";
-
-			$scope.mudarTitulo = function(){
-				$scope.title = Math.round(Math.random()*10000,0);
-				$scope.nome + $scope.titulo;
-
-			}
+		.controller('ListaController',function(){
+			var ctrl = this;
+			ctrl.titulo = "Lista";
+			ctrl.nome = "Carlos Roberto";
 
 		});
 
 
-		app.controller('listaController', function($rootScope,$scope){
-			$scope.title = "Lista";
-			$scope.lista=["Roger","Eduardo","João"];
 
-		});
 
 	</script>
+
 </head>
 <body>
 
-	<div class="container">
-		<div class="jumbotron">
-			<h1>{{title}} + {{nome}}</h1>
-		</div>
 
-		<div class="panel panel-default" ng-controller="painelController">
-			<div class="panel-heading">{{title}}</div>
-			<div class="panel-body">
-				<button class="btn btn-primary" ng-click="mudarTitulo()">Novo Titulo</button>
-				{{nome}}
-				
-
-
+<div class="container">
+			<div class="jumbotron">
+				<h1>{{titulo}} - {{nome}}</h1>
 			</div>
-		</div> <!-- Fim do Painel -->
 
+			<div class="panel panel-default" ng-controller="ListaController as lc"  >
+				<div class="panel-heading">{{lc.titulo}}</div>
+				<div class="panel-body">
+					{{lc.nome}}
 
+				</div>
+					
+			</div>		
 
-
+					
 	</div>
+
 
 </body>
 </html>
-
-<!-- Continuar com 2 minutos da aula 7 -->
-
+<!--Continuar a partir de 9:28 -->
