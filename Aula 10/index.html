@@ -22,13 +22,60 @@
 
 
 		})
+
+		.service('BuscaFilmeAPI', function($http, $q){
+			var servico = this;
+
+			servico.BuscarFilme = function(Nome){
+				var resultado = $q.defer();
+				var urlAPI  = 'http://essearch.allocine.net/br/autocomplete?q=';
+
+				$http({
+					url: urlAPI +Nome
+				}).then(function(response){
+					
+					var listaResultado = [];
+
+					listaResultado = response.data.map(function(filmeAPI){
+						return {
+							titulo : (filmeAPI.title1)?filmeAPI.title1 : filmeAPI.title2,
+							tituloOriginal:filmeAPI.title2,
+							visualizacoes:filmeAPI.viewcount,
+							urlCapa:filmeAPI.thumbnail,
+							infoAdiciona:filmeAPI.metadata.map(function(metaDataAPI){
+								return {
+									legenda:metaDataAPI.property,
+									descricao:metaDataAPI.value
+								}
+							})
+
+						};
+
+					});
+
+					resultado.resolve(listaResultado);
+				
+				}, function(){
+					resultado.reject();	
+				})
+
+				return resultado.promise;
+			}
+
+		})
 		
-
-
-		.controller('ListaController',function(){
+		.controller('ListaController',function(BuscaFilmeAPI){
 			var ctrl = this;
-			ctrl.titulo = "Lista";
-			ctrl.nome = "Carlos Roberto";
+			ctrl.titulo = "Encontre seu filme";
+			ctrl.textoBuca = null;
+			ctrl.lista = [];
+
+			ctrl.Buscar = function(){
+				BuscaFilmeAPI.BuscarFilme(ctrl.textoBusca).then(function(oLista){
+					ctrl.lista = oLista;
+				})
+
+			}
 
 		});
 
@@ -41,21 +88,35 @@
 <body>
 
 
-<div class="container">
+	<div class="container">
 			<div class="jumbotron">
-				<h1>{{titulo}} - {{nome}}</h1>
+				<h1>{{titulo}}</h1>
 			</div>
 
 			<div class="panel panel-default" ng-controller="ListaController as lc"  >
 				<div class="panel-heading">{{lc.titulo}}</div>
 				<div class="panel-body">
-					{{lc.nome}}
+					<div class="col-lg-12">
+					    <div class="input-group">
+					      <input type="text" ng-model="lc.textoBusca" class="form-control" placeholder="Buscar Por...">
+					      <span class="input-group-btn">
+					        <button class="btn btn-default" ng-click= "lc.Buscar();" type="button">Buscar</button>
+					      </span>
+					    </div><!-- /input-group -->
+					  </div><!-- /.col-lg-6 -->
+					</div><!-- /.row -->
+
+					<h3 ng-show="lc.lista.length >0 "> Filmes encontrados </h3>	
+					<ul class="lista-filme">
+						<li ng-repeat="filme in lc.lista">
+							<img ng-src="{{filme.urlCapa}}"/>
+							{{filme.titulo}} 
+						</li>
+
+					</ul>
 
 				</div>
-					
-			</div>		
-
-					
+			</div>	
 	</div>
 
 
